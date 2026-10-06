@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PonteLabWeb · Diseño y mantenimiento de páginas web</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#F6F3EE;--surface:#FCFAF7;--ink:#1F1D1A;--muted:#5E5A53;--line:#DDD6CA;--accent:#B8955A;--accent-ink:#1F1D1A;--accent-text:#8A6A2F;--warm:#E7D3A8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151412;--surface:#1E1C19;--ink:#EFEAE0;--muted:#A59F93;--line:#34312C;--accent:#C9AB70;--accent-ink:#151412;--accent-text:#C9AB70}}
+:root[data-theme="dark"]{--bg:#151412;--surface:#1E1C19;--ink:#EFEAE0;--muted:#A59F93;--line:#34312C;--accent:#C9AB70;--accent-ink:#151412;--accent-text:#C9AB70}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "DM Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Cormorant Garamond","DM Sans",system-ui,sans-serif;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0}
+.logo{display:flex;align-items:center;gap:12px;font:600 28px "Cormorant Garamond",serif;letter-spacing:.01em;text-decoration:none}.logo svg{width:38px;height:38px;flex:none}
+nav{display:flex;gap:22px;font-size:15px}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);padding:14px 24px;border-radius:10px;font-weight:700;text-decoration:none;border:0;font-size:16px;font-family:inherit;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;padding:56px 0 80px}
+.hero h1{font-size:clamp(44px,7vw,80px);font-weight:500;letter-spacing:-.01em;line-height:1.02}
+.hero p{color:var(--muted);font-size:19px;max-width:46ch;margin:22px 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.browser{background:var(--surface);border:2px solid var(--ink);border-radius:14px;box-shadow:10px 10px 0 var(--accent);overflow:hidden}
+.bar{display:flex;gap:7px;padding:11px 14px;border-bottom:2px solid var(--ink);align-items:center}
+.bar i{width:11px;height:11px;border-radius:50%;background:var(--line);display:block}
+.bar span{margin-left:10px;font-size:13px;color:var(--muted);background:var(--bg);padding:2px 12px;border-radius:20px;flex:1}
+.page{padding:22px}
+.page .b{height:12px;border-radius:6px;background:var(--line);margin-bottom:10px}
+.page .b.t{height:26px;width:70%;background:var(--ink)}
+.page .row{display:flex;gap:10px;margin-top:18px}
+.page .row div{flex:1;height:70px;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
+.page .row div:first-child{background:var(--accent)}
+.status{display:flex;align-items:center;gap:8px;margin-top:18px;font-size:13px;color:var(--muted)}
+.status b{width:9px;height:9px;border-radius:50%;background:#22A06B;display:block;animation:p 2s infinite}
+@keyframes p{50%{opacity:.35}}
+@media(prefers-reduced-motion:reduce){.status b{animation:none}html{scroll-behavior:auto}}
+section{padding:72px 0;border-top:1px solid var(--line)}
+section h2{font-size:clamp(36px,5vw,54px);font-weight:500;max-width:20ch}
+.lead{color:var(--muted);max-width:56ch;margin:14px 0 40px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:30px}
+.card h3{font-size:30px;font-weight:600;margin-bottom:12px}
+.card ul{margin:16px 0 0;padding-left:20px;color:var(--muted)}
+.card li{margin:6px 0}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px;display:flex;flex-direction:column}
+.plan.hot{border:2px solid var(--accent)}
+.plan h3{font-size:28px;font-weight:600}
+.price{font:600 46px "Cormorant Garamond",sans-serif;margin:10px 0 4px}
+.price small{font:400 15px "DM Sans",sans-serif;color:var(--muted)}
+.plan ul{padding-left:20px;color:var(--muted);flex:1}
+.plan .tag{align-self:flex-start;background:var(--warm);color:#1F1D1A;font-size:13px;font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:10px}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s;padding:0;list-style:none;margin:0}
+.steps li{counter-increment:s;border-top:3px solid var(--ink);padding-top:14px}
+.steps li::before{content:counter(s);font:600 40px "Cormorant Garamond",serif;color:var(--accent-text);display:block}
+.steps b{display:block;margin:4px 0}
+.steps span{color:var(--muted);font-size:15px}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start}
+.contact form{display:grid;gap:14px}
+label{font-weight:700;font-size:15px;display:grid;gap:6px}
+input,select,textarea{font:inherit;color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;width:100%}
+textarea{min-height:120px;resize:vertical}
+footer{padding:30px 0 40px;border-top:1px solid var(--line);color:var(--muted);font-size:15px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+@media(max-width:820px){.logo{font-size:22px;gap:8px}.logo svg{width:30px;height:30px}header .btn{padding:10px 14px;font-size:14px}.hero,.two,.plans,.contact{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}nav{display:none}.hero{padding-top:20px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <a class="logo" href="#" aria-label="PonteLabWeb, creación de páginas web"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><circle cx="24" cy="24" r="22"/><path d="M24 2V15M24 33V46M2 24H15M33 24H46"/><path d="M24 18.5Q24 24 29.5 24Q24 24 24 29.5Q24 24 18.5 24Q24 24 24 18.5Z" fill="#B8955A" stroke="none"/></svg><span>PonteLabWeb</span></a>
+  <nav><a href="#servicios">Servicios</a><a href="#mantenimiento">Mantenimiento</a><a href="#proceso">Proceso</a><a href="#contacto">Contacto</a></nav>
+  <a class="btn" href="#contacto">Pedir presupuesto</a>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <h1>Tu web, hecha a medida y siempre al día.</h1>
+    <p>Diseño y programo páginas web para negocios y profesionales, y me encargo de que sigan funcionando, seguras y rápidas después del lanzamiento.</p>
+    <div class="cta"><a class="btn" href="#contacto">Cuéntame tu proyecto</a><a class="btn ghost" href="#mantenimiento">Ver planes de mantenimiento</a></div>
+  </div>
+  <div class="browser" aria-hidden="true">
+    <div class="bar"><i></i><i></i><i></i><span>tunegocio.es</span></div>
+    <div class="page"><div class="b t"></div><div class="b" style="width:90%"></div><div class="b" style="width:60%"></div>
+      <div class="row"><div></div><div></div><div></div></div>
+      <div class="status"><b></b>Sitio activo · copia de seguridad hoy · certificado SSL válido</div>
+    </div>
+  </div>
+</div>
+
+<section id="servicios">
+  <h2>Dos formas de trabajar juntos</h2>
+  <p class="lead">Puedes contratarme para crear tu web desde cero, para cuidar la que ya tienes, o para ambas cosas.</p>
+  <div class="two">
+    <div class="card">
+      <h3>Creación de páginas web</h3>
+      <p>Una web clara, rápida y pensada para que tus clientes te contacten.</p>
+      <ul><li>Webs corporativas y páginas de aterrizaje</li><li>Tiendas online</li><li>Diseño adaptado a móvil</li><li>Textos básicos y estructura SEO</li><li>Dominio, hosting y puesta en marcha</li></ul>
+    </div>
+    <div class="card">
+      <h3>Mantenimiento web</h3>
+      <p>Te libero de las tareas técnicas para que te dediques a tu negocio.</p>
+      <ul><li>Actualizaciones de WordPress, plugins y temas</li><li>Copias de seguridad automáticas</li><li>Seguridad y control de malware</li><li>Velocidad y rendimiento</li><li>Cambios de contenido cuando los necesites</li></ul>
+    </div>
+  </div>
+</section>
+
+<section id="mantenimiento">
+  <h2>Planes de mantenimiento</h2>
+  <p class="lead">Precios de ejemplo: ajústalos a tus tarifas reales. Sin permanencia, cancelas cuando quieras.</p>
+  <div class="plans">
+    <div class="plan"><h3>Básico</h3><div class="price">29€<small> /mes</small></div>
+      <ul><li>Actualizaciones mensuales</li><li>Copia de seguridad semanal</li><li>Control de seguridad</li></ul><a class="btn ghost" href="#contacto">Elegir Básico</a></div>
+    <div class="plan hot"><span class="tag">Más elegido</span><h3>Profesional</h3><div class="price">59€<small> /mes</small></div>
+      <ul><li>Todo lo del plan Básico</li><li>Copia de seguridad diaria</li><li>Optimización de velocidad</li><li>1 hora de cambios al mes</li></ul><a class="btn" href="#contacto">Elegir Profesional</a></div>
+    <div class="plan"><h3>Completo</h3><div class="price">99€<small> /mes</small></div>
+      <ul><li>Todo lo del plan Profesional</li><li>Monitorización 24/7</li><li>3 horas de cambios al mes</li><li>Respuesta prioritaria</li></ul><a class="btn ghost" href="#contacto">Elegir Completo</a></div>
+  </div>
+</section>
+
+<section id="proceso">
+  <h2>Cómo trabajo</h2>
+  <p class="lead">Un proceso sencillo, con plazos claros y sin sorpresas en el precio.</p>
+  <ol class="steps">
+    <li><b>Hablamos</b><span>Me cuentas qué necesitas y cuál es tu objetivo.</span></li>
+    <li><b>Presupuesto</b><span>Recibes precio cerrado y plazo de entrega por escrito.</span></li>
+    <li><b>Diseño y desarrollo</b><span>Ves el avance y das feedback antes del lanzamiento.</span></li>
+    <li><b>Lanzamiento y cuidado</b><span>Publico la web y, si quieres, me encargo del mantenimiento.</span></li>
+  </ol>
+</section>
+
+<section id="contacto">
+  <div class="contact">
+    <div>
+      <h2>Hablemos de tu web</h2>
+      <p class="lead">Cuéntame brevemente qué necesitas y te respondo en menos de 24 horas laborables.</p>
+      <p>Email: <a href="mailto:hola@tudominio.es">hola@tudominio.es</a><br>Teléfono: +34 600 000 000</p>
+    </div>
+    <form id="f">
+      <label>Nombre<input id="n" required autocomplete="name"></label>
+      <label>Email<input id="e" type="email" required autocomplete="email"></label>
+      <label>¿Qué necesitas?<select id="s"><option>Crear una web nueva</option><option>Mantenimiento de mi web</option><option>Las dos cosas</option></select></label>
+      <label>Mensaje<textarea id="m"></textarea></label>
+      <button class="btn" type="submit">Enviar consulta</button>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><span>© 2026 PonteLabWeb · Diseño y mantenimiento web</span><span>Hecho con cuidado en España</span></footer>
+</div>
+<script>
+document.getElementById('f').addEventListener('submit',function(ev){
+  ev.preventDefault();
+  var b='Nombre: '+n.value+'\nEmail: '+e.value+'\nServicio: '+s.value+'\n\n'+m.value;
+  location.href='mailto:hola@tudominio.es?subject='+encodeURIComponent('Consulta web: '+s.value)+'&body='+encodeURIComponent(b);
+});
+</script>
+</body>
+</html>
